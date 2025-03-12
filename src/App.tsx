@@ -1,40 +1,42 @@
 import { useState } from "react";
-export default function App(){
-  const[input, setInput] = useState("")
-  const[idade, setIdade] = useState("");
-  const[aluno, setAluno] = useState("");
 
-  function MostrarAluno(){
-    console.log(idade);
-    setAluno(input);
+interface userProps{
+  name: string;
+  position: string;
+}
+
+export default function App(){
+  const [user, setUser] = useState<userProps>({
+    name: "Friend",
+    position: ""
+  })
+
+  function handleLogin(){
+    setUser({
+      name: "Colognese",
+      position: "Developer"
+    })
+  }
+
+  function handleLogout(){
+    setUser({
+      name: "",
+      position: ""
+    })
   }
 
   return(
     <div>
-     <h1>Getting to know useState</h1>
-
-     <input 
-     placeholder="Enter your name"
-     value={input}
-     onChange={(e) => setInput(e.target.value)}
-     />
-     
-    <br /> <br />
-    <input 
-      placeholder="Enter your age"
-      value={idade}
-      onChange={(e) => setIdade(e.target.value)}
-    />
-
-     <br /> <br />
-
-     <button onClick={MostrarAluno}>Show student</button>
+      <h1>Getting to know useState</h1>
+      <button onClick={handleLogin}>
+        Run 
+      </button>
+      <button onClick={handleLogout}>
+        Logout
+      </button>
       
-      <hr />
-
-      <h3>Welcome: {aluno}</h3>
-
-
+      <h4>Hello {user.name}</h4>
+      <strong>{user.position}</strong>
     </div>
   )
 }
